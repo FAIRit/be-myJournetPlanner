@@ -1,14 +1,17 @@
 package com.fairit.journeyapp.controllers;
 
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
 
 @RestController
 public class MainController {
 
-    @RequestMapping("/")
-    public String mainPage() {
-        return "Welcome on awesome Sandra's page!";
+    @RequestMapping(value = "/", method = RequestMethod.GET)
+    public ModelAndView mainPage() {
+        ModelAndView modelAndView = new ModelAndView("/index");
+        return modelAndView;
     }
 
 }

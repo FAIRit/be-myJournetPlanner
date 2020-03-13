@@ -7,7 +7,10 @@ import java.util.List;
 
 public interface TripRepository extends CrudRepository<Trip, Integer> {
 
+    Trip findTripById(int id);
+
     List<Trip> findAll();
 
-    List<Trip> findByUserId(int id);
+    List<Trip> findByUserId(int userId);
+
 }

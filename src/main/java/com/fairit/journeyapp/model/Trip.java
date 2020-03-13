@@ -29,4 +29,7 @@ public class Trip {
     @ManyToOne()
     @JoinColumn(name = "user_id")
     private AppUser user;
+
+
+
 }
