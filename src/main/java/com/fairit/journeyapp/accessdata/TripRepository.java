@@ -13,4 +13,6 @@ public interface TripRepository extends CrudRepository<Trip, Integer> {
 
     List<Trip> findByUserId(int userId);
 
+    Trip save(Trip trip);
+
 }
