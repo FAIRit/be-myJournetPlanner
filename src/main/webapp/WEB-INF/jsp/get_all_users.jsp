@@ -39,10 +39,11 @@
     </tr>
     <c:forEach items="${users}" var="listValue">
         <tr>
-            <td>${listValue.login}</td>
+            <td>${listValue.username}</td>
             <td>${listValue.originCountry}</td>
             <td>${listValue.email}</td>
             <td><a href="get_by_user_id/${listValue.id}">Trips</a></td>
+            <td><a href="<c:url value='/user/delete/{listValue.username}'/>">Delete</a></td>
         </tr>
     </c:forEach>
 </table>

@@ -50,6 +50,6 @@
 </table>
 
 <br>
-<a href="/journeyapp-0.0.1-SNAPSHOT">Go back to the home page</a>
+<a href="/">Go back to the home page</a>
 </body>
 </html>

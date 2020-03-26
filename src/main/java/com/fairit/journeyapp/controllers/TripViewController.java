@@ -1,6 +1,6 @@
 package com.fairit.journeyapp.controllers;
 
-import com.fairit.journeyapp.accessdata.TripRepository;
+import com.fairit.journeyapp.repository.TripRepository;
 import com.fairit.journeyapp.model.Trip;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -24,8 +24,8 @@ public class TripViewController {
         return "get_all_trips";
     }
 
-    @GetMapping("/get_by_user_id/{id}")
-    public String getByUserId(@PathVariable(value = "id") int userId, Model model){
+    @GetMapping("/user/get_by_user_id/{id}")
+    public String getByUserId(@PathVariable(value = "id") long userId, Model model){
         List<Trip> trips = tripRepository.findByUserId(userId);
         model.addAttribute("trips", trips);
 
