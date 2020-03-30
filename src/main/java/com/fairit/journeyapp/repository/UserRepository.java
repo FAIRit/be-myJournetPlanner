@@ -1,14 +1,16 @@
 package com.fairit.journeyapp.repository;
 
 import com.fairit.journeyapp.model.User;
-import com.sun.xml.bind.v2.model.core.ID;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
+
 
 import java.util.List;
 
+@Repository
 public interface UserRepository extends CrudRepository<User, Long> {
 
-    void deleteByUsername(String username);
+    void deleteById(long userId);
 
     User findUserById(Long userId);
 
@@ -17,6 +19,7 @@ public interface UserRepository extends CrudRepository<User, Long> {
     List<User> findAll();
 
     boolean existsByUsername(String username);
+
     User save(User user);
 
 }

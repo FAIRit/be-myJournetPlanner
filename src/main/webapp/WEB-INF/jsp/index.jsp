@@ -7,10 +7,13 @@
     <a href="trips">Show me all trips!</a>
     <br>
     <br>
-    <a href="get_by_user_id/2">Show me trips of user with id = 2 !</a>
+    <a href="user/get_by_user_id/2">Show me trips of user with id = 2 !</a>
     <br>
     <br>
-    <a href="users">Show me all users!</a>
+    <a href="user/users">Show me all users!</a>
+    <br>
+    <br>
+    <a href="user/register">NEW USER!</a>
 </div>
 </body>
 </html>

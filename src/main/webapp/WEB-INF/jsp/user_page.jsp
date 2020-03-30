@@ -28,6 +28,10 @@
         <td>Origin Country</td>
         <td>${originCountry}</td>
     </tr>
-</table>
+    <tr>
+        <td>Trips</td>
+        <td>${trips}</td>
+    </tr>
+   </table>
 </body>
 </html>

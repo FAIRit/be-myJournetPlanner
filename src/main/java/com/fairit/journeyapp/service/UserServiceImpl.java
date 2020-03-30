@@ -12,22 +12,26 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private UserRepository userRepository;
 
-
-
     @Override
     public void save(User user) {
-        user.setUsername(user.getUsername());
-        user.setPassword(user.getPassword());
         userRepository.save(user);
     }
 
     @Override
-    public List<User> getAllUsers() {
-        return null;
+    public List<User> findAllUsers() {
+        return userRepository.findAll();
+    }
+
+    public User findUserByUsername(String username) {
+        return userRepository.findUserByUsername(username);
+    }
+
+    public void delete(long id){
+        userRepository.deleteById(id);
     }
 
     @Override
-    public User findUserByUsername(String username) {
-        return userRepository.findUserByUsername(username);
+    public User findUserById(long userId) {
+        return null;
     }
 }

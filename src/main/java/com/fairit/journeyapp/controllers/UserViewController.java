@@ -5,22 +5,19 @@ import com.fairit.journeyapp.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 
+import javax.validation.Valid;
 import java.util.List;
-import java.util.Map;
+
 
 @Controller
-
 public class UserViewController {
 
-    public UserViewController(UserRepository userRepository) {
-        this.userRepository = userRepository;
-    }
-
-
-    UserRepository userRepository;
+    @Autowired
+    private UserRepository userRepository;
 
     @GetMapping("/user/users")
     public String showAllUsers(Model model){
@@ -35,7 +32,7 @@ public class UserViewController {
 //        return "user_page";
 //    }
 
-    @GetMapping("/user/details/{userId}")
+    @GetMapping("user/details/{userId}")
     public String userDetails(@PathVariable("userId") Long userId,
                                 Model model){
         User user = userRepository.findUserById(userId);
@@ -43,6 +40,7 @@ public class UserViewController {
         model.addAttribute("password", user.getPassword());
         model.addAttribute("email", user.getEmail());
         model.addAttribute("originCountry", user.getOriginCountry());
+        model.addAttribute("trips", user.getTripsList());
 
         return "user_page";
     }
@@ -61,25 +59,45 @@ public class UserViewController {
         return "redirect:user/details/" + user.getId();
     }
 
-    @GetMapping("/user/edit/{userId}")
-    public String edit(@PathVariable("userId") long userId, Model model){
+//    @GetMapping("/user/edit/{userId}")
+//    public String edit(@PathVariable("userId") long userId, Model model){
+//        User user = userRepository.findUserById(userId);
+//        model.addAttribute("user", user);
+//
+//        return "user_update";
+//    }
+//
+//    @PostMapping("/user/update")
+//    public String update(User user, Model model){
+//        //userRepository.u
+//        return  "redirect:user/details/" + user.getId();
+//    }
+
+    @GetMapping("/edit/{userId}")
+    public String showUpdateForm(@PathVariable("userId") long userId, Model model){
         User user = userRepository.findUserById(userId);
         model.addAttribute("user", user);
-
         return "user_update";
     }
 
-    @PostMapping("/user/update")
-    public String update(User user, Model model){
-        //userRepository.u
-        return  "redirect:user/details/" + user.getId();
+    @PostMapping("/update/{userId}")
+    public String updateUser(@PathVariable("userId") long userId, @Valid User user, BindingResult result, Model model){
+        if(result.hasErrors()){
+            user.setId(userId);
+            return "user_update";
+        }
+        userRepository.save(user);
+        model.addAttribute("users", userRepository.findAll());
+        return "index";
     }
 
-    @GetMapping("/user/delete/{username}")
-    public String delete(@PathVariable("username") String username, Model model){
-        userRepository.deleteByUsername(username);
-
-        return "redirect:/user/users";
+    @GetMapping("/user/delete/{userId}")
+    public String deleteUser(@PathVariable("userId") long userId, Model model){
+        User user = userRepository.findUserById(userId);
+        userRepository.delete(user);
+        model.addAttribute("users", userRepository.findAll());
+        return "index";
     }
+
 
 }
