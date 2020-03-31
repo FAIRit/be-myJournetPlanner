@@ -23,6 +23,10 @@
                 <td><form:input path="password"/></td>
             </tr>
             <tr>
+                <td><form:label path="passwordConfirm">Password confirmation</form:label></td>
+                <td><form:input path="passwordConfirm"/></td>
+            </tr>
+            <tr>
                 <td><form:label path="email">Email</form:label></td>
                 <td><form:input path="email"/></td>
             </tr>

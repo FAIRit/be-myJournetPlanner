@@ -28,6 +28,7 @@ public class User {
     @NotBlank(message = "Password is mandatory")
     private String password;
     @Transient
+    @NotBlank(message = "Password is mandatory")
     private String passwordConfirm;
     @Column(name = "user_email")
     private String email;
@@ -35,9 +36,11 @@ public class User {
     private String originCountry;
 
     @ManyToMany
+    @JoinTable
     private Set<Role> role;
 
     @OneToMany(mappedBy = "user")
+
     private List <Trip> tripsList;
 
 }

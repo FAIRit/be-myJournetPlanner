@@ -48,11 +48,11 @@
             <td>${listValue.firstDay}</td>
             <td>${listValue.lastDay}</td>
             <td>${listValue.user.id}</td>
-            <td>${listValue.user.email}</td>
+            <td>${listValue.user.username}</td>
         </tr>
     </c:forEach>
 </table>
 <br>
-<a href="/journeyapp-0.0.1-SNAPSHOT">Go back to the home page</a>
+<a href="/journeyapp_war">Go back to the home page</a>
 </body>
 </html>

@@ -2,6 +2,9 @@ package com.fairit.journeyapp.controllers;
 
 import com.fairit.journeyapp.repository.UserRepository;
 import com.fairit.journeyapp.model.User;
+import com.fairit.journeyapp.service.SecurityService;
+import com.fairit.journeyapp.service.UserService;
+import com.fairit.journeyapp.validator.UserValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,6 +22,16 @@ public class UserViewController {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private UserService userService;
+
+    @Autowired
+    private SecurityService securityService;
+
+    @Autowired
+    private UserValidator userValidator;
+
+
     @GetMapping("/user/users")
     public String showAllUsers(Model model){
         List<User> users = userRepository.findAll();
@@ -26,11 +39,6 @@ public class UserViewController {
         return "get_all_users";
     }
 
-//    @GetMapping("/details/{userId}")
-//    public String userDetails(@PathVariable("userId") Long userId, Model model){
-//        model.addAttribute("userdata", userId);
-//        return "user_page";
-//    }
 
     @GetMapping("user/details/{userId}")
     public String userDetails(@PathVariable("userId") Long userId,
@@ -53,10 +61,30 @@ public class UserViewController {
     }
 
     @PostMapping("/user/create")
-    public String create(User user){
-        userRepository.save(user);
+    public String create(@ModelAttribute("user") User user, BindingResult bindingResult){
+        userValidator.validate(user, bindingResult);
+
+        if (bindingResult.hasErrors()){
+            return "user_registration";
+        }
+
+        userService.save(user);
+
+        securityService.autoLogin(user.getUsername(), user.getPasswordConfirm());
 
         return "redirect:user/details/" + user.getId();
+    }
+
+    @GetMapping("/user/login")
+    public String login(Model model, String error, String logout){
+        if (error != null)
+            model.addAttribute("error",  "Your username or password is invalid.");
+
+        if (logout != null)
+            model.addAttribute("message", "You have been logged out successfully.");
+
+        return "user_login";
+
     }
 
 //    @GetMapping("/user/edit/{userId}")

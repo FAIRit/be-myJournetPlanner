@@ -48,5 +48,7 @@
         </tr>
     </c:forEach>
 </table>
+<br>
+<a href="/journeyapp_war">Go back to the home page</a>
 </body>
 </html>
