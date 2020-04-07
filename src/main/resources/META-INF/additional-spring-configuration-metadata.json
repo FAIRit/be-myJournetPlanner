@@ -1,0 +1,8 @@
+{
+  "properties": [
+    {
+      "name": "database.properties",
+      "type": "java.lang.String",
+      "description": "Description for database.properties."
+  }
+] }

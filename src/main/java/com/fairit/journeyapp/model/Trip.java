@@ -17,7 +17,7 @@ public class Trip {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "trip_id", updatable = false, nullable = false)
-    private int id;
+    private Long id;
     @Column(name = "trip_country")
     private String country;
     @Column(name = "trip_city")
@@ -28,7 +28,7 @@ public class Trip {
     private Date lastDay;
     @ManyToOne()
     @JoinColumn(name = "user_id")
-    private AppUser user;
+    private User user;
 
 
 

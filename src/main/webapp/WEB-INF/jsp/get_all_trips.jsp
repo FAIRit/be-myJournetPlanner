@@ -53,6 +53,6 @@
     </c:forEach>
 </table>
 <br>
-<a href="/journeyapp-0.0.1-SNAPSHOT">Go back to the home page</a>
+<a href="/journeyapp_war/">Go back to the home page</a>
 </body>
 </html>
